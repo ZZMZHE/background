@@ -1,0 +1,36 @@
+.avatar-uploader .el-upload {
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .avatar-uploader .el-upload:hover {
+    border-color: #409EFF;
+  }
+  .avatar-uploader-icon1 {
+    font-size: 28px;
+    color: #8c939d;
+    width: 360px !important;
+    height: 180px !important;
+    line-height: 180px;
+    text-align: center;
+  }
+  .tihuan1 {
+      display: block;
+      position: absolute;
+      bottom: 0px;
+      left: 0px;
+      z-index: 100;
+      width: 100%;
+      color: #8c939d;
+  }
+  .avatar-uploader .el-upload:hover .tihuan1 {
+    color: #8c939d !important;
+    display: block;
+}
+  .avatar1 {
+    width: 360px !important;
+    height: 180px !important;
+    display: block;
+  }

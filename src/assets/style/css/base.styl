@@ -1,0 +1,21 @@
+html, body 
+    background: #FAFAFA
+.clear-fix
+    &:after, &:before 
+        display: table 
+        content: ''
+    &:after
+        clear: both
+
+textarea
+    /* 防止文本域被随意拖拽 */
+    resize: none
+ 
+i, em
+    /*文字样式*/
+    font-style: normal;
+
+a 
+    text-decoration: none
+li 
+    list-style: none
