@@ -50,7 +50,12 @@
           :header-cell-style="{ background: '#f5f5f5' }"
           style="width: 100%"
         >
-          <el-table-column prop="sort" align="center" width="100" label="序号">
+          <el-table-column
+            prop="sort"
+            align="center"
+            width="100"
+            label="用户昵称"
+          >
             <template slot-scope="scope">
               <el-image
                 style="width: 40px; height: 40px"
@@ -60,52 +65,38 @@
               </el-image>
             </template>
           </el-table-column>
-          <el-table-column prop="nickname" align="center" label="用户头像">
+          <el-table-column prop="nickname" align="center" label="账号">
           </el-table-column>
-          <el-table-column prop="addTime" align="center" label="用户昵称">
+          <el-table-column prop="addTime" align="center" label="联系人">
           </el-table-column>
-          <el-table-column prop="mobile" align="center" label="会员类型">
+          <el-table-column prop="mobile" align="center" label="联系方式">
           </el-table-column>
           <el-table-column
             prop="countMoney"
             align="center"
             width="180"
-            label="发布时间"
+            label="企业名称"
           >
             <template slot-scope="scope">
               <span>{{ "￥" + scope.row.rechargeNum }}</span>
             </template>
           </el-table-column>
-
-          <el-table-column align="center" width="240" label="操作">
-            <template slot-scope="scope">
-              <span class="color" @click="godeta({ id: scope.row.id })"
-                >查看浏览轨迹</span
-              >
-              <!-- <span class="color margin" style="color: #FE093C" @click="godeta({ id: scope.row.id })">禁言</span> -->
-              <span
-                v-if="scope.row.status == 0"
-                class="color margin"
-                style="color: #fe093c"
-                @click="stopLogin(scope.row.id, 1)"
-                >禁止登录</span
-              >
-              <span
-                v-if="scope.row.status == 1"
-                class="color margin"
-                style="color: #1890ff"
-                @click="stopLogin(scope.row.id, 0)"
-                >启用登录</span
-              >
-              <span
-                class="color margin"
-                style="color: #fe093c"
-                @click="openDia(scope.row.id, scope.row.remark)"
-                >备注</span
-              >
-            </template>
+          <el-table-column prop="mobile" align="center" label="企业地址">
           </el-table-column>
+          <el-table-column prop="mobile" align="center" label="申请时间">
+          </el-table-column>
+           <el-table-column
+                        align="center"
+                        label="操作">
+                        <template slot-scope="scope">
+                            <span class="color" style="color: #7F0319" @click="goDetails({ id: scope.row.id, type: 2 })">编辑</span>
+                            <span class="color margin" style="color: #7F0319" @click="goTalk({ id: scope.row.id, type: '2' })">查看评论</span>
+                            
+                        </template>
+                    </el-table-column>
         </el-table>
+        <!-- 临时测试 -->
+        <button @click="tiaozhuan">查看</button> 
         <div class="paging">
           <el-pagination
             @size-change="handleSizeChange"
@@ -124,7 +115,10 @@
 </template>
 <script>
 import { userList, userUpdateStatus, userUpdateRemark } from "api/index.js";
+import { Alert } from 'element-ui';
+// import { log } from "console";
 export default {
+  name: 'entApplication',
   data() {
     return {
       formInline: {
@@ -148,10 +142,19 @@ export default {
     };
   },
   methods: {
-    //Tabs切换
-    handleClick(tab, event) {
-      
-        this.$router.push({ name:'abcdefg'})
+    //临时测试
+    tiaozhuan () {
+      console.log('测试测试');
+      this.$router.push({ name: "particulars" });
+    },
+    // //Tabs切换
+      handleClick(tab, event) {
+      console.log(tab, event);
+      if (tab.name == "third") {
+        this.$router.push({ name: "failAudit" });
+      } else if (tab.name == "second") {
+        this.$router.push({name:"succeedAudit"});
+      }
     },
     // 搜索
     search() {
@@ -178,6 +181,12 @@ export default {
       this.pageNum = val;
       this.getData();
     },
+      handleEdit(index, row) {
+        console.log(index, row);
+      },
+      handleDelete(index, row) {
+        console.log(index, row);
+      }
   },
   computed: {},
   components: {},
@@ -185,51 +194,54 @@ export default {
 };
 </script>
 <style lang="stylus" scope>
-.awaitAudit{
-.conn{
-   background #ffffff
-   margin 20px 20px 0 20px
-}
-.paging {
-  text-align: center;
-  padding: 20px 0;
-  background: #ffffff;
-}
-
-.color {
-  color: #7F0319;
-  cursor: pointer;
-}
-
-.margin {
-  margin-left: 10px;
-}
-
-.userData {
-  width: 100%;
-
-  .searchBox {
-    height: 140px;
+.awaitAudit {
+  .conn {
     background: #ffffff;
-    padding-left: 80px;
+    margin: 20px 20px 0 20px;
+  }
 
-    // text-align center
-    .demo-form-inline {
-      padding-top: 54px;
-      .search {
-        width: 346px;
-      }
-      .searchBtn {
-        background: #222222;
-        color: #fff;
+  .paging {
+    text-align: center;
+    padding: 20px 0;
+    background: #ffffff;
+  }
+
+  .color {
+    color: #7F0319;
+    cursor: pointer;
+  }
+
+  .margin {
+    margin-left: 10px;
+  }
+
+  .userData {
+    width: 100%;
+
+    .searchBox {
+      height: 140px;
+      background: #ffffff;
+      padding-left: 80px;
+
+      // text-align center
+      .demo-form-inline {
+        padding-top: 54px;
+
+        .search {
+          width: 346px;
+        }
+
+        .searchBtn {
+          background: #222222;
+          color: #fff;
+        }
       }
     }
-  }
 
-  .tableBox {
-    padding: 0 80px;
-    background: #ffffff;
+    .tableBox {
+      padding: 0 80px;
+      background: #ffffff;
+    }
   }
-}
 }
 </style>

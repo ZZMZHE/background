@@ -215,6 +215,7 @@ export default {
 <style lang='stylus' scoped>
 // @import url(); 引入公共css类
 .edipVip{
+  background #ffffff;
  .conn{
    background #ffffff;
    margin 20px 20px 0 20px;
