@@ -33,13 +33,13 @@
           <el-button class="restBtn" @click="reset">重置</el-button>
         </el-form-item>
       </el-form>
-      <!-- 头部 -->
+
       <el-tabs v-model="activeName" @tab-click="handleClick">
-        <el-tab-pane label="待审核" name="first">待审核</el-tab-pane
+        <el-tab-pane label="待审核" name="first"></el-tab-pane
         ><!-- tab切换 -->
-        <el-tab-pane label="审核成功" name="second">审核成功</el-tab-pane>
+        <el-tab-pane label="审核成功" name="second"></el-tab-pane>
         <!-- tab切换 -->
-        <el-tab-pane label="审核失败" name="third">审核失败</el-tab-pane>
+        <el-tab-pane label="审核失败" name="third"></el-tab-pane>
         <!-- tab切换 -->
       </el-tabs>
       <div class="tableBox">
@@ -118,12 +118,42 @@
           </el-pagination>
         </div>
       </div>
+      <!-- 临时测试 -->
+      <button @click="tiaozhuan">查看</button>  
+       <el-button type="text" @click="dialogVisible = true"
+          >点击打开 Dialog</el-button
+        >
+        <el-dialog
+          title="审核"
+          :visible.sync="dialogVisible"
+          width="30%"
+          :before-close="handleClose"
+        >
+          <el-form ref="form" :model="form" label-width="80px">
+            <el-form-item label="选择">
+              <el-select v-model="form.region" placeholder="请选择活动区域">
+                <el-option label="通过" value="shanghai"></el-option>
+                <el-option label="不通过" value="beijing"></el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item label="备注">
+              <el-input type="textarea" v-model="form.desc"></el-input>
+            </el-form-item>
+          </el-form>
+          <span slot="footer" class="dialog-footer">
+            <el-button @click="dialogVisible = false">取 消</el-button>
+            <el-button type="primary" @click="dialogVisible = false"
+              >确 定</el-button
+            >
+          </span>
+        </el-dialog>
     </div>
   </div>
 </template>
 <script>
 import { userList, userUpdateStatus, userUpdateRemark } from "api/index.js";
 export default {
+  name: "awaitAudit",
   data() {
     return {
       formInline: {
@@ -136,6 +166,7 @@ export default {
       form: {
         remark: "",
       },
+      dialogVisible:false,
       activeName: "first",
       tableData: [],
       pageSize: 10,
@@ -154,6 +185,19 @@ export default {
       } else if (tab.name == "third") {
         this.$router.push("./failAudit");
       }
+    },
+    
+    tiaozhuan() { // 临时测试
+      console.log("啊啊啊");
+      this.$router.push({ name: "particulars4" });
+    },
+    //弹框
+     handleClose(done) {
+      this.$confirm("确认关闭？")
+        .then((_) => {
+          done();
+        })
+        .catch((_) => {});
     },
     // 搜索
     search() {
@@ -180,6 +224,7 @@ export default {
       this.pageNum = val;
       this.getData();
     },
+    
   },
   computed: {},
   components: {},
@@ -187,19 +232,9 @@ export default {
 };
 </script>
 <style lang="stylus" scope>
-.awaitAudit{
-.conn{
-   background #ffffff
-   margin 20px 20px 0 20px
-}
-.paging {
-  text-align: center;
-  padding: 20px 0;
-  background: #ffffff;
-}
-
+// @import url()引入公共css类,
 .color {
-  color: #7F0319;
+  color: #1890FF;
   cursor: pointer;
 }
 
@@ -207,31 +242,53 @@ export default {
   margin-left: 10px;
 }
 
-.userData {
-  width: 100%;
+.paging {
+  padding: 20px 0;
+  text-align: center;
+}
 
-  .searchBox {
-    height: 140px;
-    background: #ffffff;
-    padding-left: 80px;
+.bg {
+  background: #222222;
+  color: #ffffff;
+}
 
-    // text-align center
-    .demo-form-inline {
-      padding-top: 54px;
-      .search {
-        width: 346px;
-      }
-      .searchBtn {
-        background: #222222;
-        color: #fff;
-      }
+.awaitAudit {
+    .header {
+      margin-left: 15px;
+    }
+
+    .tableBox {
+      padding: 20px 50px;
+      background: #ffffff;
     }
   }
 
-  .tableBox {
-    padding: 0 80px;
-    background: #ffffff;
+.userData {
+  width: 100%;
+}
+
+.searchBox {
+  height: 140px;
+  background: #ffffff;
+  padding-left: 80px;
+
+  // text-align center
+  .demo-form-inline {
+    padding-top: 54px;
+
+    .search {
+      width: 346px;
+    }
+
+    .searchBtn {
+      background: #222222;
+      color: #fff;
+    }
   }
 }
+
+.tableBox {
+  padding: 0 80px;
+  background: #ffffff;
 }
 </style>

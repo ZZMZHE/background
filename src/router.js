@@ -222,17 +222,25 @@ export default new Router({
                         import("views/f-inspiration/succeedAudit.vue")
                 },
                 {
+                    // 灵感库详情
+                    path: "particulars4",
+                    name:"particulars4",
+                    component: () =>
+                        import("views/f-inspiration/particulars.vue")
+                },
+                {
                     // 人才对接管理
                     //企业申请
                     path: "entApplication",
+                    name: "entApplication",
                     component: () =>
-                        import("views/f-talents/entApplication.vue")
+                        import("views/f-talents/Enterprise/entApplication.vue")
                 },
                 {
                     path: "particulars",
                     name:'particulars',
                     component: () =>
-                        import("views/f-talents/particulars.vue")
+                        import("views/f-talents/Enterprise/particulars.vue")
                 },
                 {
                     name: "failAudit",
@@ -245,6 +253,58 @@ export default new Router({
                     path: "succeedAudit",
                     component: () =>
                         import("views/f-talents/Enterprise/succeedAudit.vue")
+                },
+                {
+                    // 人才对接管理
+                    //招聘职位
+                    path: "Recruitment",
+                    name: "Recruitment",
+                    component: () =>
+                        import("views/f-talents/Recruitment/Recruitment.vue")
+                },
+                {
+                    path: "particulars1",
+                    name:'particulars1',
+                    component: () =>
+                        import("views/f-talents/Recruitment/particulars.vue")
+                },
+                {
+                    name: "failAudit1",
+                    path: "failAudit1",
+                    component: () =>
+                        import("views/f-talents/Recruitment/failAudit.vue")
+                },
+                {
+                    name: "succeedAudit1",
+                    path: "succeedAudit1",
+                    component: () =>
+                        import("views/f-talents/Recruitment/succeedAudit.vue")
+                },
+                {
+                    // 人才对接管理
+                    //人才简历管理
+                    path: "talents",
+                    name: "talents",
+                    component: () =>
+                        import("views/f-talents/talents/talents.vue")
+                },
+                {
+                    path: "particulars2",
+                    name:'particulars2',
+                    component: () =>
+                        import("views/f-talents/talents/particulars.vue")
+                },
+                {
+                    name: "failAudit2",
+                    path: "failAudit2",
+                    component: () =>
+                        import("views/f-talents/talents/failAudit.vue")
+                },
+                {
+                    name: "succeedAudit2",
+                    path: "succeedAudit2",
+                    component: () =>
+                        import("views/f-talents/talents/succeedAudit.vue")
                 },
                 {
                     // 广告位设置

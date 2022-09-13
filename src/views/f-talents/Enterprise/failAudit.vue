@@ -1,5 +1,5 @@
 <template>
-  <div class="awaitAudit">
+  <div class="failAudit">
     <div class="conn">
       <el-form
         :inline="true"
@@ -36,11 +36,11 @@
       </el-form>
       <!-- 头部 -->
       <el-tabs v-model="activeName" @tab-click="handleClick">
-        <el-tab-pane label="待审核" name="first">待审核</el-tab-pane
+        <el-tab-pane label="待审核" name="first"></el-tab-pane
         ><!-- tab切换 -->
-        <el-tab-pane label="审核成功" name="second">审核成功人才管理旗下</el-tab-pane>
+        <el-tab-pane label="审核成功" name="second"></el-tab-pane>
         <!-- tab切换 -->
-        <el-tab-pane label="审核失败" name="third">审核失败人才管理旗下</el-tab-pane>
+        <el-tab-pane label="审核失败" name="third"></el-tab-pane>
         <!-- tab切换 -->
       </el-tabs>
       <div class="tableBox">
@@ -188,55 +188,8 @@ export default {
 };
 </script>
 <style lang="stylus" scope>
-.awaitAudit {
-  .conn {
-    background: #ffffff;
-    margin: 20px 20px 0 20px;
-  }
 
-  .paging {
-    text-align: center;
-    padding: 20px 0;
-    background: #ffffff;
-  }
 
-  .color {
-    color: #7F0319;
-    cursor: pointer;
-  }
 
-  .margin {
-    margin-left: 10px;
-  }
-
-  .userData {
-    width: 100%;
-
-    .searchBox {
-      height: 140px;
-      background: #ffffff;
-      padding-left: 80px;
-
-      // text-align center
-      .demo-form-inline {
-        padding-top: 54px;
-
-        .search {
-          width: 346px;
-        }
-
-        .searchBtn {
-          background: #222222;
-          color: #fff;
-        }
-      }
-    }
-
-    .tableBox {
-      padding: 0 80px;
-      background: #ffffff;
-    }
-  }
-}
 </style>
 

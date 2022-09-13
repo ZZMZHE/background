@@ -7,18 +7,18 @@
         class="demo-form-inline"
         size="small"
       >
-        <el-form-item label="昵称">
+        <el-form-item label="用户昵称">
           <el-input
             class="search"
             v-model="formInline.nickname"
-            placeholder="请输入昵称"
+            placeholder="请输入视频名称"
             style="width: 180px"
           ></el-input>
         </el-form-item>
         <el-form-item label="状态" prop="status">
           <el-select
             v-model="formInline.status"
-            placeholder="请选择"
+            placeholder="全部"
             style="width: 150px"
           >
             <!-- //1 免费 2 收费 为空全部 -->
@@ -33,9 +33,9 @@
       </el-form>
 
       <el-tabs v-model="activeName" @tab-click="handleClick">
-        <el-tab-pane label="待审核" name="first">待审核</el-tab-pane>
-        <el-tab-pane label="审核成功" name="second">审核成功</el-tab-pane>
-        <el-tab-pane label="审核失败" name="third">审核失败</el-tab-pane>
+        <el-tab-pane label="待审核" name="first"></el-tab-pane>
+        <el-tab-pane label="审核成功" name="second"></el-tab-pane>
+        <el-tab-pane label="审核失败" name="third"></el-tab-pane>
       </el-tabs>
 
       <div class="tableBox">
@@ -114,6 +114,8 @@
           </el-pagination>
         </div>
       </div>
+      <!-- 临时测试 -->
+      <button @click="tiaozhuan">查看</button>
     </div>
   </div>
 </template>
@@ -177,27 +179,20 @@ export default {
       this.pageNum = val;
       this.getData();
     },
+    tiaozhuan() {
+      // 临时测试
+      console.log("啊啊啊");
+      this.$router.push({ name: "particulars4" });
+    },
   },
   computed: {},
   watch: {},
 };
 </script>
 <style lang="stylus" scoped>
-// @import url(); 引入公共css类
-.succeedAudit{
-.conn {
-  background: #ffffff;
-  margin: 20px 20px 0 20px;
-}
-
-.paging {
-  text-align: center;
-  padding: 20px 0;
-  background: #ffffff;
-}
-
+// @import url()引入公共css类,
 .color {
-  color: #7F0319;
+  color: #1890FF;
   cursor: pointer;
 }
 
@@ -205,33 +200,49 @@ export default {
   margin-left: 10px;
 }
 
+.paging {
+  padding: 20px 0;
+  text-align: center;
+}
+
+.bg {
+  background: #222222;
+  color: #ffffff;
+}
+
+.succeedAudit {
+  .tableBox {
+    padding: 20px 50px;
+    background: #ffffff;
+  }
+}
+
 .userData {
   width: 100%;
+}
 
-  .searchBox {
-    height: 140px;
-    background: #ffffff;
-    padding-left: 80px;
+.searchBox {
+  height: 140px;
+  background: #ffffff;
+  padding-left: 80px;
 
-    // text-align center
-    .demo-form-inline {
-      padding-top: 54px;
+  // text-align center
+  .demo-form-inline {
+    padding-top: 54px;
 
-      .search {
-        width: 346px;
-      }
+    .search {
+      width: 346px;
+    }
 
-      .searchBtn {
-        background: #222222;
-        color: #fff;
-      }
+    .searchBtn {
+      background: #222222;
+      color: #fff;
     }
   }
+}
 
-  .tableBox {
-    padding: 0 80px;
-    background: #ffffff;
-  }
-  }
+.tableBox {
+  padding: 0 80px;
+  background: #ffffff;
 }
 </style>
