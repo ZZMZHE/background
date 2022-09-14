@@ -123,6 +123,7 @@
 <script>
 import { userList, userUpdateStatus, userUpdateRemark } from "api/index.js";
 export default {
+  name: "awaitAudit",
   data() {
     return {
       formInline: {
@@ -151,9 +152,10 @@ export default {
     handleClick(tab, event) {
       console.log(tab, event);
       if (tab.name == "second") {
-        this.$router.push("./succeedAudit");
+        this.$router.push({ name: "InsSucceedAudit" });
       } else if (tab.name == "first") {
-        this.$router.push("./awaitAudit");
+        this.$router.push({ name: "InsAwaitAudit" });
+        
       }
     },
     // 搜索
@@ -183,7 +185,7 @@ export default {
     },
     tiaozhuan() { // 临时测试
       console.log("啊啊啊");
-      this.$router.push({ name: "particulars4" });
+      this.$router.push({ name: "InsParticulars" });
     },
   
   },
@@ -192,9 +194,15 @@ export default {
 };
 </script>
 <style lang="stylus" scoped>
-// @import url()引入公共css类,
+// @import url(); 引入公共css类
+.paging {
+  text-align: center;
+  padding: 20px 0;
+  background: #ffffff;
+}
+
 .color {
-  color: #1890FF;
+  color: #7F0319;
   cursor: pointer;
 }
 
@@ -202,49 +210,31 @@ export default {
   margin-left: 10px;
 }
 
-.paging {
-  padding: 20px 0;
-  text-align: center;
-}
-
-.bg {
-  background: #222222;
-  color: #ffffff;
-}
-
 .failAudit {
+  width: 100%;
+
   .tableBox {
-    padding: 20px 50px;
     background: #ffffff;
   }
-}
 
-.userData {
-  width: 100%;
-}
+  .conn {
+    height: 140px;
+    background: #ffffff;
+    padding-left: 10px;
 
-.searchBox {
-  height: 140px;
-  background: #ffffff;
-  padding-left: 80px;
+    // text-align center
+    .demo-form-inline {
+      padding-top: 30px;
 
-  // text-align center
-  .demo-form-inline {
-    padding-top: 54px;
+      .search {
+        width: 346px;
+      }
 
-    .search {
-      width: 346px;
-    }
-
-    .searchBtn {
-      background: #222222;
-      color: #fff;
+      .searchBtn {
+        background: #222222;
+        color: #fff;
+      }
     }
   }
-}
-
-.tableBox {
-  padding: 0 80px;
-  background: #ffffff;
 }
 </style>

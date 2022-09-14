@@ -1,31 +1,29 @@
 <template>
-  <div class="awaitAudit">
+  <div class="succeedAudit">
     <div class="conn">
       <el-form
         :inline="true"
         :model="formInline"
         class="demo-form-inline"
-        size="medium"
-        label-size="20px"
+        size="small"
       >
-        <el-form-item label="昵称" class="item">
+        <el-form-item label="用户昵称">
           <el-input
             class="search"
             v-model="formInline.nickname"
-            placeholder="请输入昵称"
+            placeholder="请输入用户昵称"
             style="width: 180px"
           ></el-input>
         </el-form-item>
         <el-form-item label="会员类型" prop="status">
           <el-select
             v-model="formInline.status"
-            placeholder="请选择"
+            placeholder="全部"
             style="width: 150px"
           >
             <!-- //1 免费 2 收费 为空全部 -->
-            <el-option label="xxx会员" value="0"></el-option>
-            <el-option label="xxx会员" value="1"></el-option>
-            <el-option label="xxx会员" value="3"></el-option>
+            <el-option label="普通用户" value="0"></el-option>
+            <el-option label="会员" value="1"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item>
@@ -35,13 +33,11 @@
       </el-form>
 
       <el-tabs v-model="activeName" @tab-click="handleClick">
-        <el-tab-pane label="待审核" name="first"></el-tab-pane
-        ><!-- tab切换 -->
+        <el-tab-pane label="待审核" name="first"></el-tab-pane>
         <el-tab-pane label="审核成功" name="second"></el-tab-pane>
-        <!-- tab切换 -->
         <el-tab-pane label="审核失败" name="third"></el-tab-pane>
-        <!-- tab切换 -->
       </el-tabs>
+
       <div class="tableBox">
         <el-table
           :data="tableData"
@@ -119,34 +115,35 @@
         </div>
       </div>
       <!-- 临时测试 -->
-      <button @click="tiaozhuan">查看</button>  
-       <el-button type="text" @click="dialogVisible = true"
-          >点击打开 Dialog</el-button
-        >
-        <el-dialog
-          title="审核"
-          :visible.sync="dialogVisible"
-          width="30%"
-          :before-close="handleClose"
-        >
-          <el-form ref="form" :model="form" label-width="80px">
-            <el-form-item label="选择">
-              <el-select v-model="form.region" placeholder="请选择活动区域">
-                <el-option label="通过" value="shanghai"></el-option>
-                <el-option label="不通过" value="beijing"></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item label="备注">
-              <el-input type="textarea" v-model="form.desc"></el-input>
-            </el-form-item>
-          </el-form>
-          <span slot="footer" class="dialog-footer">
-            <el-button @click="dialogVisible = false">取 消</el-button>
-            <el-button type="primary" @click="dialogVisible = false"
-              >确 定</el-button
-            >
-          </span>
-        </el-dialog>
+      <button @click="tiaozhuan">查看</button>
+      <el-button type="text" @click="dialogVisible = true"
+        >点击打开 Dialog</el-button
+      >
+
+      <el-dialog
+        title="审核"
+        :visible.sync="dialogVisible"
+        width="30%"
+        :before-close="handleClose"
+      >
+        <el-form ref="form" :model="form" label-width="80px">
+          <el-form-item label="选择">
+            <el-select v-model="form.region" placeholder="请选择活动区域">
+              <el-option label="通过" value="shanghai"></el-option>
+              <el-option label="不通过" value="beijing"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="备注">
+            <el-input type="textarea" v-model="form.desc"></el-input>
+          </el-form-item>
+        </el-form>
+        <span slot="footer" class="dialog-footer">
+          <el-button @click="dialogVisible = false">取 消</el-button>
+          <el-button type="primary" @click="dialogVisible = false"
+            >确 定</el-button
+          >
+        </span>
+      </el-dialog>
     </div>
   </div>
 </template>
@@ -163,9 +160,6 @@ export default {
         status: undefined,
         remark: undefined,
       },
-      form: {
-        remark: "",
-      },
       dialogVisible:false,
       activeName: "first",
       tableData: [],
@@ -173,6 +167,9 @@ export default {
       pageNum: 1,
       total: 10,
       dialogFormVisible: false,
+      form: {
+        remark: "",
+      },
       formLabelWidth: "80px",
       id: "",
     };
@@ -180,19 +177,15 @@ export default {
   methods: {
     //Tabs切换
     handleClick(tab, event) {
-      if (tab.name == "second") {
-        this.$router.push("./succeedAudit");
-      } else if (tab.name == "third") {
-        this.$router.push("./failAudit");
+      console.log(tab, event);
+      if (tab.name == "third") {
+        this.$router.push({ name: "InsFailAudit" });
+      } else if (tab.name == "second") {
+        this.$router.push({ name: "InsSucceedAudit" });
       }
     },
-    
-    tiaozhuan() { // 临时测试
-      console.log("啊啊啊");
-      this.$router.push({ name: "particulars4" });
-    },
-    //弹框
-     handleClose(done) {
+    //弹窗
+    handleClose(done) {
       this.$confirm("确认关闭？")
         .then((_) => {
           done();
@@ -224,17 +217,26 @@ export default {
       this.pageNum = val;
       this.getData();
     },
-    
+    tiaozhuan() {
+      // 临时测试
+      console.log("啊啊啊");
+      this.$router.push({ name: "InsParticulars" });
+    },
   },
   computed: {},
-  components: {},
   watch: {},
 };
 </script>
-<style lang="stylus" scope>
-// @import url()引入公共css类,
+<style lang="stylus" scoped>
+// @import url(); 引入公共css类
+.paging {
+  text-align: center;
+  padding: 20px 0;
+  background: #ffffff;
+}
+
 .color {
-  color: #1890FF;
+  color: #7F0319;
   cursor: pointer;
 }
 
@@ -242,53 +244,31 @@ export default {
   margin-left: 10px;
 }
 
-.paging {
-  padding: 20px 0;
-  text-align: center;
-}
-
-.bg {
-  background: #222222;
-  color: #ffffff;
-}
-
-.awaitAudit {
-    .header {
-      margin-left: 15px;
-    }
-
-    .tableBox {
-      padding: 20px 50px;
-      background: #ffffff;
-    }
-  }
-
-.userData {
+.succeedAudit {
   width: 100%;
-}
 
-.searchBox {
-  height: 140px;
-  background: #ffffff;
-  padding-left: 80px;
+  .tableBox {
+    background: #ffffff;
+  }
 
-  // text-align center
-  .demo-form-inline {
-    padding-top: 54px;
+  .conn {
+    height: 140px;
+    background: #ffffff;
+    padding-left: 10px;
 
-    .search {
-      width: 346px;
-    }
+    // text-align center
+    .demo-form-inline {
+      padding-top: 30px;
 
-    .searchBtn {
-      background: #222222;
-      color: #fff;
+      .search {
+        width: 346px;
+      }
+
+      .searchBtn {
+        background: #222222;
+        color: #fff;
+      }
     }
   }
-}
-
-.tableBox {
-  padding: 0 80px;
-  background: #ffffff;
 }
 </style>

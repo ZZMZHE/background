@@ -206,25 +206,28 @@ export default new Router({
                 },
                 {
                     // 灵感库管理
-                    path: "awaitAudit",
+                    path: "InsAwaitAudit",
+                    name: "InsAwaitAudit",
                     component: () =>
                         import("views/f-inspiration/awaitAudit.vue")
                 },
                 {
                     // 灵感库管理
-                    path: "failAudit",
+                    path: "InsFailAudit",
+                    name: "InsFailAudit",
                     component: () => import("views/f-inspiration/failAudit.vue")
                 },
                 {
                     // 灵感库管理
-                    path: "succeedAudit",
+                    path: "InsSucceedAudit",
+                    name: "InsSucceedAudit",
                     component: () =>
                         import("views/f-inspiration/succeedAudit.vue")
                 },
                 {
                     // 灵感库详情
-                    path: "particulars4",
-                    name:"particulars4",
+                    path: "InsParticulars",
+                    name: "InsParticulars",
                     component: () =>
                         import("views/f-inspiration/particulars.vue")
                 },
@@ -237,20 +240,21 @@ export default new Router({
                         import("views/f-talents/Enterprise/entApplication.vue")
                 },
                 {
-                    path: "particulars",
-                    name:'particulars',
+                    //详情
+                    path: "EntParticulars",
+                    name: "EntParticulars",
                     component: () =>
                         import("views/f-talents/Enterprise/particulars.vue")
                 },
                 {
-                    name: "failAudit",
-                    path: "failAudit",
+                    name: "EntFailAudit",
+                    path: "EntFailAudit",
                     component: () =>
                         import("views/f-talents/Enterprise/failAudit.vue")
                 },
                 {
-                    name: "succeedAudit",
-                    path: "succeedAudit",
+                    name: "EntSucceedAudit",
+                    path: "EntSucceedAudit",
                     component: () =>
                         import("views/f-talents/Enterprise/succeedAudit.vue")
                 },
@@ -263,20 +267,20 @@ export default new Router({
                         import("views/f-talents/Recruitment/Recruitment.vue")
                 },
                 {
-                    path: "particulars1",
-                    name:'particulars1',
+                    path: "RecParticulars",
+                    name: "RecParticulars",
                     component: () =>
                         import("views/f-talents/Recruitment/particulars.vue")
                 },
                 {
-                    name: "failAudit1",
-                    path: "failAudit1",
+                    name: "RecFailAudit",
+                    path: "RecFailAudit",
                     component: () =>
                         import("views/f-talents/Recruitment/failAudit.vue")
                 },
                 {
-                    name: "succeedAudit1",
-                    path: "succeedAudit1",
+                    name: "RecSucceedAudit",
+                    path: "RecSucceedAudit",
                     component: () =>
                         import("views/f-talents/Recruitment/succeedAudit.vue")
                 },
@@ -289,20 +293,20 @@ export default new Router({
                         import("views/f-talents/talents/talents.vue")
                 },
                 {
-                    path: "particulars2",
-                    name:'particulars2',
+                    path: "TalParticulars",
+                    name: "TalParticulars",
                     component: () =>
                         import("views/f-talents/talents/particulars.vue")
                 },
                 {
-                    name: "failAudit2",
-                    path: "failAudit2",
+                    name: "TalFailAudit",
+                    path: "TalFailAudit",
                     component: () =>
                         import("views/f-talents/talents/failAudit.vue")
                 },
                 {
-                    name: "succeedAudit2",
-                    path: "succeedAudit2",
+                    name: "TalSucceedAudit",
+                    path: "TalSucceedAudit",
                     component: () =>
                         import("views/f-talents/talents/succeedAudit.vue")
                 },

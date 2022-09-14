@@ -1,5 +1,5 @@
 <template>
-  <div class="failAudit">
+  <div class="EntFailAudit">
     <div class="conn">
       <el-form
         :inline="true"
@@ -12,20 +12,19 @@
           <el-input
             class="search"
             v-model="formInline.nickname"
-            placeholder="请输入昵称"
+            placeholder="请输入视频名称"
             style="width: 180px"
           ></el-input>
         </el-form-item>
-        <el-form-item label="会员类型" prop="status">
+        <el-form-item label="状态" prop="status">
           <el-select
             v-model="formInline.status"
-            placeholder="请选择"
+            placeholder="全部"
             style="width: 150px"
           >
             <!-- //1 免费 2 收费 为空全部 -->
-            <el-option label="xxx会员" value="0"></el-option>
-            <el-option label="xxx会员" value="1"></el-option>
-            <el-option label="xxx会员" value="3"></el-option>
+            <el-option label="普通用户" value="0"></el-option>
+            <el-option label="会员" value="1"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item>
@@ -87,16 +86,27 @@
           </el-table-column>
           <el-table-column prop="mobile" align="center" label="备注">
           </el-table-column>
-           <el-table-column
-                        align="center"
-                        label="操作">
-                        <template slot-scope="scope">
-                            <span class="color" style="color: #7F0319" @click="goDetails({ id: scope.row.id, type: 2 })">编辑</span>
-                            <span class="color margin" style="color: #7F0319" @click="goTalk({ id: scope.row.id, type: '2' })">查看评论</span>
-                            
-                        </template>
-                    </el-table-column>
+          <el-table-column align="center" label="操作">
+            <template slot-scope="scope">
+              <span
+                class="color"
+                style="color: #7f0319"
+                @click="goDetails({ id: scope.row.id, type: 2 })"
+                >编辑</span
+              >
+              <span
+                class="color margin"
+                style="color: #7f0319"
+                @click="goTalk({ id: scope.row.id, type: '2' })"
+                >查看评论</span
+              >
+            </template>
+          </el-table-column>
         </el-table>
+        <!-- 临时测试 -->
+        <button @click="tiaozhuan">查看</button>
+    
+
         <div class="paging">
           <el-pagination
             @size-change="handleSizeChange"
@@ -115,9 +125,10 @@
 </template>
 <script>
 import { userList, userUpdateStatus, userUpdateRemark } from "api/index.js";
+import { Alert } from "element-ui";
 // import { log } from "console";
 export default {
-  name:'entApplication',
+  name: "entApplication",
   data() {
     return {
       formInline: {
@@ -130,6 +141,7 @@ export default {
       form: {
         remark: "",
       },
+      dialogVisible: false,
       activeName: "third",
       tableData: [],
       pageSize: 10,
@@ -141,13 +153,18 @@ export default {
     };
   },
   methods: {
-    // //Tabs切换
-      handleClick(tab, event) {
+    //临时测试
+    tiaozhuan() {
+      console.log("测试测试");
+      this.$router.push({ name: "EntParticulars" });
+    }, 
+   //Tabs切换
+    handleClick(tab, event) {
       console.log(tab, event);
       if (tab.name == "second") {
-        this.$router.push({ name: "succeedAudit" });
+        this.$router.push({ name: "EntSucceedAudit" });
       } else if (tab.name == "first") {
-        this.$router.push({name:"entApplication"});
+        this.$router.push({ name: "entApplication" });
       }
     },
     // 搜索
@@ -175,12 +192,12 @@ export default {
       this.pageNum = val;
       this.getData();
     },
-      handleEdit(index, row) {
-        console.log(index, row);
-      },
-      handleDelete(index, row) {
-        console.log(index, row);
-      }
+    handleEdit(index, row) {
+      console.log(index, row);
+    },
+    handleDelete(index, row) {
+      console.log(index, row);
+    },
   },
   computed: {},
   components: {},
@@ -188,8 +205,47 @@ export default {
 };
 </script>
 <style lang="stylus" scope>
+// @import url(); 引入公共css类
+.paging {
+  text-align: center;
+  padding: 20px 0;
+  background: #ffffff;
+}
 
+.color {
+  color: #7F0319;
+  cursor: pointer;
+}
 
+.margin {
+  margin-left: 10px;
+}
 
+.EntFailAudit {
+  width: 100%;
+
+  .tableBox {
+    background: #ffffff;
+  }
+
+  .conn {
+    height: 140px;
+    background: #ffffff;
+    padding-left: 10px;
+
+    // text-align center
+    .demo-form-inline {
+      padding-top: 30px;
+
+      .search {
+        width: 346px;
+      }
+
+      .searchBtn {
+        background: #222222;
+        color: #fff;
+      }
+    }
+  }
+}
 </style>
-
